@@ -1,0 +1,11 @@
+.wrapper {
+  font-size: 24px;
+  color: var(--blue-grey-500);
+  font-weight: 500;
+}
+
+@media screen and (max-width: 320px) {
+  .wrapper {
+    font-size: 18px;
+  }
+}

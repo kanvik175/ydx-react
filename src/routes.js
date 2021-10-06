@@ -1,10 +1,10 @@
 import Settings from './pages/settings/Settings';
-import Start from './pages/start/Start';
+import Main from './pages/main/Main';
 
 const routes = [
   {
     path: '/',
-    component: Start,
+    component: Main,
     exact: true,
   },
   {
