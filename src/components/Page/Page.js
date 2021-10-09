@@ -19,7 +19,7 @@ export default function Page() {
       <div className={styles.content}>
         <SettingsContext.Provider value={settings}>
           <Switch>
-            { routes.map((route) => <Route {...route} />) }
+            { routes.map((route, index) => <Route key={index} {...route} />) }
           </Switch>
         </SettingsContext.Provider>
       </div>

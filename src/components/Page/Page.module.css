@@ -6,4 +6,15 @@
 
 .content {
   flex-grow: 1;
+  max-width: 876px;
+  margin: 0 auto;
+  padding: 0 16px;
+  width: 100%;
+  padding-top: 10px;
+}
+
+@media screen and (max-width: 520px) {
+  .content {
+    padding-top: 12px;
+  }
 }

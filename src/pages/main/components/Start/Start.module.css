@@ -2,14 +2,12 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  max-width: 824px;
-  margin: 0 auto;
+  margin-bottom: 30px;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
-  padding-top: 10px;
 }
 
 .content {
@@ -28,9 +26,10 @@
 }
 
 .settingsLogo {
-  padding-bottom: 32px;
+  margin-bottom: 32px;
 }
 
 .message {
+  margin: 0 0 24px 0;
   text-align: center;
 }

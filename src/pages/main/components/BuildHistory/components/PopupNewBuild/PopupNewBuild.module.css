@@ -1,0 +1,24 @@
+.wrapper {
+  display: grid;
+  grid-gap: 12px;
+}
+
+.title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.caption {
+  margin: 0;
+}
+
+.buttonContainer {
+  display: flex;
+}
+
+@media screen and (max-width: 520px) {
+  .buttonContainer {
+    flex-direction: column;
+  }
+}

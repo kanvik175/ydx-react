@@ -1,16 +1,14 @@
 import React from 'react';
 import styles from './Button.module.css';
 
-// color: primary, secondary 
-// size: small, large
 export default function Button({ 
   children, 
-  icon, 
   clickHandler, 
   color, 
   size = 'large', 
   disabled,
-  isFullWidth
+  isFullWidth,
+  type = 'button'
 }) {
 
   let wrapperClass = `${styles.wrapper} ${getSizeClass(size)} ${getColorClass(color)}`;
@@ -20,7 +18,7 @@ export default function Button({
   }
 
   return (
-    <button disabled={disabled} onClick={clickHandler} class={wrapperClass}>
+    <button type={type} disabled={disabled} onClick={clickHandler} className={wrapperClass}>
       {children}
     </button>
   );

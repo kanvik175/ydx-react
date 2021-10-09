@@ -1,10 +1,17 @@
 .wrapper {
   background-color: var(--blue-grey-50);
-  padding: 0 100px;
+  display: flex;
+  justify-content: center;
+  padding: 0 16px;
+}
+
+.innerContainer {
   min-height: 32px;
   display: grid;
   grid-template-columns: auto auto;
   align-items: center;
+  max-width: 840px;
+  flex-grow: 1;
 }
 
 .list {
@@ -15,7 +22,7 @@
 }
 
 .listItem:not(:last-child) {
-  padding-right: 12px;
+  margin-right: 12px;
 }
 
 .link {
@@ -37,11 +44,15 @@
   text-align: right;
 }
 
-@media screen and (max-width: 520px) {
+@media screen and (max-width: 540px) {
   .wrapper {
     padding: 12px 16px;
+  }
+
+  .innerContainer {
     grid-template-columns: auto;
     grid-gap: 8px;
+    min-height: initial;
   }
 
   .copyright {

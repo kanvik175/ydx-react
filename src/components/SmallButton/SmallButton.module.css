@@ -1,0 +1,15 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.name {
+  margin: 0 5px;
+}
+
+@media screen and (max-width: 480px) {
+  .name {
+    display: none;
+  }
+}

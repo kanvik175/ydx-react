@@ -1,0 +1,187 @@
+.wrapper {
+  display: flex;
+  padding: 12px 25px;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0px 0px 1px rgba(67, 68, 69, 0.3),
+    0px 1px 1px rgba(67, 68, 69, 0.3);
+}
+
+.wrapper:hover {
+  box-shadow: 0px 0px 1px rgba(67, 68, 69, 0.3),
+    0px 2px 8px rgba(67, 68, 69, 0.3);
+}
+
+.statusContainer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  margin-right: 10px;
+}
+
+.statusIcon {
+  width: 22px;
+  height: 22px;
+}
+
+.content {
+  display: flex;
+  flex-grow: 1;
+}
+
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.title {
+  display: flex;
+  align-items: flex-start;
+}
+
+.commitNumber {
+  font-weight: 500;
+  font-size: 18px;
+  margin: 0 4px 0 0;
+}
+
+.commitNumber__status_success {
+  color: #00b341;
+}
+
+.commitNumber__status_pending {
+  color: var(--orange-500);
+}
+
+.commitNumber__status_fail {
+  color: var(--red-500);
+}
+
+.commitMessage {
+  font-size: 15px;
+  margin: 0;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.credentials {
+  display: flex;
+}
+
+.commitInfo {
+  display: flex;
+  margin-right: 10px;
+  align-items: center;
+}
+
+.commitIcon {
+  width: 16px;
+  height: 8px;
+  margin-right: 4px;
+}
+
+.branchName {
+  margin: 0 4px 0 0;
+}
+
+.commitHash {
+  color: rgba(0, 0, 0, 0.65);
+  margin: 0;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+}
+
+.userIcon {
+  width: 12px;
+  height: 14px;
+  margin-right: 6px;
+}
+
+.userName {
+  margin: 0;
+}
+
+.timeContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.dateContainer {
+  display: flex;
+}
+
+.calendarIcon {
+  width: 14px;
+  margin-right: 5px;
+}
+
+.time {
+  color: rgba(0, 0, 0, 0.65);
+  margin: 0;
+}
+
+.durationContainer {
+  display: flex;
+}
+
+.timeIcon {
+  width: 13px;
+  margin-right: 5px;
+}
+
+@media screen and (max-width: 520px) {
+  .wrapper {
+    padding: 16px 13px;
+  }
+
+  .statusIcon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .content {
+    flex-direction: column;
+  }
+
+  .infoContainer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .title {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .commitNumber {
+    margin-bottom: 8px;
+    font-size: 16px;
+  }
+
+  .credentials {
+    flex-direction: column;
+  }
+
+  .commitInfo {
+    margin-bottom: 8px;
+  }
+
+  .timeContainer {
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-top: 9px;
+    padding-top: 8px;
+    border-top: 1px solid var(--blue-grey-50);
+  }
+
+  .dateContainer {
+    margin-right: 10px;
+  }
+}
