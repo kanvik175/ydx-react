@@ -11,6 +11,7 @@
 .label__required::after {
   content: '*';
   color: var(--red-500);
+  margin-left: 2px;
 }
 
 .inputContainer {

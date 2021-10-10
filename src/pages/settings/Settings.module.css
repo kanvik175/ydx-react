@@ -60,4 +60,10 @@
   .buttonContainer {
     flex-direction: column;
   }
+  .description {
+    margin-bottom: 14px;
+  }
+  .title {
+    margin-top: 20px;
+  }
 }

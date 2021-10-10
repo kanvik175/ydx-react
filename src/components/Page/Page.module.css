@@ -6,11 +6,10 @@
 
 .content {
   flex-grow: 1;
-  max-width: 876px;
+  max-width: 856px;
   margin: 0 auto;
-  padding: 0 16px;
+  padding: 10px 16px 0;
   width: 100%;
-  padding-top: 10px;
 }
 
 @media screen and (max-width: 520px) {
