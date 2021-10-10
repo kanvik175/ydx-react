@@ -1,4 +1,4 @@
-export const initialCardList = [
+export const initialCommitList = [
   {
     status: 'success',
     commitNumber: 1368,

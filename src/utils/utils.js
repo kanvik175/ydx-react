@@ -52,4 +52,16 @@ export const asyncRequest = (random = true) => {
       resolve();
     }, 1000);
   })
+
+}
+
+export const generateStatus = () => {
+  const statuses = [
+    'success',
+    'fail',
+    'pending'
+  ]
+
+  const randomId = Math.floor(Math.random() * statuses.length)
+  return statuses[randomId];
 }

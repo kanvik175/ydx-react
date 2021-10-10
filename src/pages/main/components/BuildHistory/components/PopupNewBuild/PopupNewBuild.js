@@ -8,12 +8,12 @@ import Spacer from '../../../../../../components/Spacer/Spacer';
 import styles from './PopupNewBuild.module.css';
 import { asyncRequest } from '../../../../../../utils/utils';
 
-export default function PopupNewBuild({ isOpen, closePopup, onSubmit }) {
+export default function PopupNewBuild({ isOpen, closePopup, handleSubmit }) {
 
+  const inputRef = useRef();
+  const [isLoading, setIsLoading] = useState(false);
   const [commitHash, setCommitHash, clearCommitHash, isError, setIsError] 
     = useInput('');
-  const [isLoading, setIsLoading] = useState(false);
-  const inputRef = useRef();
 
   useEffect(() => {
     if (isOpen) {
@@ -41,8 +41,8 @@ export default function PopupNewBuild({ isOpen, closePopup, onSubmit }) {
 
     asyncRequest(false)
       .then(() => {
-        onSubmit(commitHash);
         setIsLoading(false);
+        handleSubmit(commitHash);
         closePopup();
       })
       .catch(() => {
@@ -61,6 +61,7 @@ export default function PopupNewBuild({ isOpen, closePopup, onSubmit }) {
         <h3 className={styles.title}>New build</h3>
         <p className={styles.caption}>Enter the commit hash which you want to build.</p>
         <Input 
+          isError={isError}
           placeholder='Commit hash' 
           value={commitHash} 
           changeHandler={changeHandler}
