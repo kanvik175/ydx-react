@@ -15,7 +15,8 @@ export default function BuildHistory({
   commitList, 
   showMoreCommits, 
   isNoMoreCommits, 
-  addNewCommit 
+  addNewCommit,
+  repositoryName,
 }) {
 
   const [isOpenPopup, setIsOpenPopup] = useState(false);
@@ -63,7 +64,7 @@ export default function BuildHistory({
       </Helmet>
       <header className={styles.header}>
         <h1 className={styles.title}>
-          philip1967/my-awesome-repo
+          {repositoryName}
         </h1>
         <div className={styles.buttonContainer}>
           <ButtonWithIcon text='Run build' icon={playIcon} clickHandler={openPopup} />

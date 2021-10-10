@@ -7,11 +7,13 @@ import {
   visibleCommitListSelector,  
   isFullVisibleCommitListSelector
 } from '../../../../store/buildHistory/buildHistorySelectors';
+import { repositorySelector } from '../../../../store/settings/settingsSelectors';
 
 export default function BuildHistory() {
 
   const visibleCommitList = useSelector(visibleCommitListSelector);
   const isFullVisibleCommitList = useSelector(isFullVisibleCommitListSelector);
+  const repository = useSelector(repositorySelector);
   const { incrementVisibleCommitCount, addCommit } = useActions(actions);
 
   return (
@@ -20,6 +22,7 @@ export default function BuildHistory() {
       showMoreCommits={incrementVisibleCommitCount}  
       isNoMoreCommits={isFullVisibleCommitList}
       addNewCommit={addCommit}
+      repositoryName={repository}
     />
   )
 }
