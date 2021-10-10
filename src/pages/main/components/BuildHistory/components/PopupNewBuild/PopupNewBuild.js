@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Popup from '../../../../../../components/Popup/Popup';
 import Input from '../../../../../../components/Input/Input';
 import useInput from '../../../../../../hooks/useInput';
@@ -11,11 +11,23 @@ export default function PopupNewBuild({ isOpen, closePopup }) {
 
   const [commitHash, setCommitHash, clearCommitHash] = useInput('');
 
+  useEffect(() => {
+    if (isOpen) {
+      clearCommitHash();
+    }
+  }, [isOpen, clearCommitHash])
+
   const isMobile = useMedia('(max-width: 520px)');
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    closePopup();
+  }
 
   return (
     <Popup isOpen={isOpen} width={485} height={188}>
-      <div className={styles.wrapper}>
+      <form onSubmit={submitHandler} className={styles.wrapper}>
         <h3 className={styles.title}>New build</h3>
         <p className={styles.caption}>Enter the commit hash which you want to build.</p>
         <Input 
@@ -29,7 +41,7 @@ export default function PopupNewBuild({ isOpen, closePopup }) {
         <div className={styles.buttonContainer}>
           <Button 
             isFullWidth={isMobile} 
-            clickHandler={closePopup} 
+            type='submit'
             color='primary'>
               Run build
           </Button>
@@ -41,7 +53,7 @@ export default function PopupNewBuild({ isOpen, closePopup }) {
               Cancel
           </Button>
         </div>
-      </div>
+      </form>
     </Popup>
   )
 }

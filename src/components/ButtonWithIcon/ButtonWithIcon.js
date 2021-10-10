@@ -1,8 +1,8 @@
 import React from 'react';
 import Button from '../Button/Button';
-import styles from './SmallButton.module.css';
+import styles from './ButtonWithIcon.module.css';
 
-export default function SmallButton({ text, icon, clickHandler, type }) {
+export default function ButtonWithIcon({ text, icon, clickHandler, type }) {
   const isTextExists = !!text;
   return (
     <Button color='secondary' size='small' clickHandler={clickHandler} type={type} >

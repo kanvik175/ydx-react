@@ -26,40 +26,7 @@
   margin: 8px 0 22px;
 }
 
-.inputContainer {
-  display: grid;
-  grid-gap: 18px;
-}
-
-.syncContainer {
-  display: flex;
-  margin-top: 20px;
-  margin-bottom: 24px;
-  align-items: center;
-}
-
-.syncDescription {
-  margin-right: 8px;
-}
-
-.syncUnits {
-  margin-left: 8px;
-  color: var(--blue-grey-600);
-}
-
-.buttonContainer {
-  display: flex;
-}
-
-.error {
-  margin-top: 20px;
-  color: var(--red-500);
-}
-
 @media screen and (max-width: 480px) {
-  .buttonContainer {
-    flex-direction: column;
-  }
   .description {
     margin-bottom: 14px;
   }

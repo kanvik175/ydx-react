@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import styles from './Start.module.css';
 import Logo from '../../../../components/Logo/Logo';
 import Button from '../../../../components/Button/Button';
-import SmallButton from '../../../../components/SmallButton/SmallButton';
+import ButtonWithIcon from '../../../../components/ButtonWithIcon/ButtonWithIcon';
 import settingsLogo from './assets/settings_logo.svg';
 import gearIcon from '../../../../assets/gear.svg';
 
@@ -19,7 +19,7 @@ export default function BuildHistory() {
     <div className={styles.wrapper}>
       <header className={styles.header}>
         <Logo />
-        <SmallButton clickHandler={clickHandler} text='Settings' icon={gearIcon}>Settings</SmallButton>
+        <ButtonWithIcon clickHandler={clickHandler} text='Settings' icon={gearIcon}>Settings</ButtonWithIcon>
       </header>
       <main className={styles.content}>
         <div className={styles.info}>

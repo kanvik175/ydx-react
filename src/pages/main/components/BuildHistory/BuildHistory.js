@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 import styles from './BuildHistory.module.css';
 import Button from '../../../../components/Button/Button';
-import SmallButton from '../../../../components/SmallButton/SmallButton';
+import ButtonWithIcon from '../../../../components/ButtonWithIcon/ButtonWithIcon';
 import Card from './components/Card/Card';
 import playIcon from '../../../../assets/play.svg';
 import gearIcon from '../../../../assets/gear.svg';
@@ -55,8 +55,8 @@ export default function BuildHistory() {
           philip1967/my-awesome-repo
         </h1>
         <div className={styles.buttonContainer}>
-          <SmallButton text='Run build' icon={playIcon} clickHandler={openPopup} />
-          <SmallButton icon={gearIcon} clickHandler={handleSettingClick} />
+          <ButtonWithIcon text='Run build' icon={playIcon} clickHandler={openPopup} />
+          <ButtonWithIcon icon={gearIcon} clickHandler={handleSettingClick} />
         </div>
       </header>
       <main className={styles.content}>
