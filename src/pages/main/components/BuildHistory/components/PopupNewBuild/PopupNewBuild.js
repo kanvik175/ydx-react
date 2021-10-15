@@ -10,7 +10,8 @@ import { asyncRequest } from '../../../../../../utils/utils';
 
 export default function PopupNewBuild({ isOpen, closePopup, onSubmit }) {
 
-  const [commitHash, setCommitHash, clearCommitHash] = useInput('');
+  const [commitHash, setCommitHash, clearCommitHash, isError, setIsError] 
+    = useInput('');
   const [isLoading, setIsLoading] = useState(false);
   const inputRef = useRef();
 
@@ -31,6 +32,11 @@ export default function PopupNewBuild({ isOpen, closePopup, onSubmit }) {
   const submitHandler = (e) => {
     e.preventDefault();
 
+    if (commitHash.length === 0) {
+      setIsError(true);
+      return;
+    }
+
     setIsLoading(true);
 
     asyncRequest(false)
@@ -44,6 +50,11 @@ export default function PopupNewBuild({ isOpen, closePopup, onSubmit }) {
       })
   }
 
+  const changeHandler = (hash) => {
+    setIsError(false);
+    setCommitHash(hash);
+  }
+
   return (
     <Popup isOpen={isOpen} closePopup={closePopup} width={485} height={188}>
       <form onSubmit={submitHandler} className={styles.wrapper}>
@@ -52,11 +63,12 @@ export default function PopupNewBuild({ isOpen, closePopup, onSubmit }) {
         <Input 
           placeholder='Commit hash' 
           value={commitHash} 
-          changeHandler={setCommitHash}
+          changeHandler={changeHandler}
           clearHandler={clearCommitHash}
           name='commitHash'
           width={!isMobile && 446}
           ref={inputRef}
+          isError={isError}
         />
         <div className={styles.buttonContainer}>
           <Button 
