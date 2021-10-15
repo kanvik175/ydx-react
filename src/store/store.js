@@ -1,4 +1,4 @@
-import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import { configureStore, combineReducers, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { createLogger } from 'redux-logger';
 import settingsReducer from './settings/settingsSlice';
 import buildHistoryReducer from './buildHistory/buildHistorySlice';
@@ -8,7 +8,7 @@ const reducer = combineReducers({
   buildHistory: buildHistoryReducer,
 })
 
-const middleware = [];
+const middleware = [...getDefaultMiddleware()];
 
 if (process.env.NODE_ENV === 'development') {
   const logger = createLogger({

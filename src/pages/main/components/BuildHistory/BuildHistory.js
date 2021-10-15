@@ -5,24 +5,25 @@ import useActions from '../../../../hooks/useActions';
 import { actions } from '../../../../store/buildHistory/buildHistorySlice';
 import { 
   visibleCommitListSelector,  
-  isFullVisibleCommitListSelector
+  isFullVisibleCommitListSelector,
+  commitListIsLoadingSelector,
 } from '../../../../store/buildHistory/buildHistorySelectors';
-import { repositorySelector } from '../../../../store/settings/settingsSelectors';
 
 export default function BuildHistory() {
 
   const visibleCommitList = useSelector(visibleCommitListSelector);
   const isFullVisibleCommitList = useSelector(isFullVisibleCommitListSelector);
-  const repository = useSelector(repositorySelector);
-  const { incrementVisibleCommitCount, addCommit } = useActions(actions);
+  const commitListIsLoading = useSelector(commitListIsLoadingSelector);
+  const { incrementVisibleCommitCount, addCommit, setPopupIsOpen } = useActions(actions);
 
   return (
     <BuildHistoryTemplate 
       commitList={visibleCommitList} 
       showMoreCommits={incrementVisibleCommitCount}  
+      commitListIsLoading={commitListIsLoading}
       isNoMoreCommits={isFullVisibleCommitList}
       addNewCommit={addCommit}
-      repositoryName={repository}
+      setPopupIsOpen={setPopupIsOpen}
     />
   )
 }

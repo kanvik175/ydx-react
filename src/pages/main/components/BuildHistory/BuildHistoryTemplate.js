@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useHistory } from 'react-router-dom';
 import styles from './BuildHistory.module.css';
@@ -9,28 +9,22 @@ import playIcon from '../../../../assets/play.svg';
 import gearIcon from '../../../../assets/gear.svg';
 import useMedia from '../../../../hooks/useMedia';
 import PopupNewBuild from './components/PopupNewBuild/PopupNewBuild';
-import { generateStatus } from '../../../../utils/utils';
 
 export default function BuildHistory({ 
   commitList, 
   showMoreCommits, 
   isNoMoreCommits, 
   addNewCommit,
-  repositoryName,
+  commitListIsLoading,
+  setPopupIsOpen,
 }) {
-
-  const [isOpenPopup, setIsOpenPopup] = useState(false);
 
   const isMobile = useMedia('(max-width: 520px)');
 
   const history = useHistory();
 
-  const closePopup = () => {
-    setIsOpenPopup(false);
-  }
-
   const openPopup = () => {
-    setIsOpenPopup(true);
+    setPopupIsOpen(true);
   }
 
   const handleShowMoreClick = () => {
@@ -43,19 +37,6 @@ export default function BuildHistory({
 
   const isShowButton = !isNoMoreCommits;
 
-  const handlePopupSubmit = (hash) => {
-    addNewCommit({
-      status: generateStatus(),
-      commitMessage: 'commit message',
-      commitHash: hash,
-      userName: 'rus',
-      branchName: 'master',
-      date: Date.now(),
-      start: Date.now(),
-      end: Date.now() + 60 * 40 * 1000,
-    })
-  }
-
   return (
     <div className={styles.wrapper}>
       <Helmet>
@@ -64,7 +45,7 @@ export default function BuildHistory({
       </Helmet>
       <header className={styles.header}>
         <h1 className={styles.title}>
-          {repositoryName}
+          philip1967/my-awesome-repo
         </h1>
         <div className={styles.buttonContainer}>
           <ButtonWithIcon text='Run build' icon={playIcon} clickHandler={openPopup} />
@@ -84,13 +65,10 @@ export default function BuildHistory({
           color='secondary'
           size={isMobile ? 'large' : 'small'}
           clickHandler={handleShowMoreClick} 
+          disabled={commitListIsLoading}
         >Show more</Button> }
       </main>
-      <PopupNewBuild 
-        isOpen={isOpenPopup} 
-        closePopup={closePopup} 
-        handleSubmit={handlePopupSubmit} 
-      />
+      <PopupNewBuild />
     </div>
   );
 }

@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './Form.module.css';
-import useInput from '../../../hooks/useInput';
+import useInput from '../../../../hooks/useInput';
 import { useHistory } from 'react-router-dom';
-import Input from '../../../components/Input/Input';
-import Spacer from '../../../components/Spacer/Spacer';
-import Button from '../../../components/Button/Button';
-import { generateBoolean } from '../../../utils/utils';
+import Input from '../../../../components/Input/Input';
+import Spacer from '../../../../components/Spacer/Spacer';
+import Button from '../../../../components/Button/Button';
 
-export default function Form({ setSettings }) {
+export default function Form({ setSettings, isError, isLoading }) {
 
   const [
     repositoryValue, 
@@ -25,9 +24,6 @@ export default function Form({ setSettings }) {
   ] = useInput();
   const [branchValue, changeBranchValue, clearBranchValue] = useInput();
   const [syncValue, changeSyncValue] = useInput();
-
-  const [isError, setIsError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
   const history = useHistory();
 
@@ -50,25 +46,15 @@ export default function Form({ setSettings }) {
       return;
     }
 
-    setIsLoading(true);
-
-    setTimeout(() => {
-      const success = generateBoolean();
-
-      if (success) {
-        setSettings({
-          repository: repositoryValue,
-          command: commandValue,
-          branch: branchValue,
-          syncPeriod: syncValue,
-        });
-        setIsLoading(false);
-        history.push('/');
-      } else {
-        setIsError(true);
-        setIsLoading(false);
-      }
-    }, 1000);
+    setSettings({
+      repository: repositoryValue,
+      command: commandValue,
+      branch: branchValue,
+      syncPeriod: syncValue,
+    })
+    .unwrap()
+    .then(() => history.push('/'))
+    .catch(() => {});
   }
 
   const handleRepositoryChange = (value) => {

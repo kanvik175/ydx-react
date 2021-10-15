@@ -38,7 +38,7 @@ export const debounce = (func, time) => {
   }
 }
 
-const generateBoolean = () => {
+export const generateBoolean = () => {
   return Math.random() > 0.5;
 }
 
