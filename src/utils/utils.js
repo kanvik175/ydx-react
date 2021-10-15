@@ -4,10 +4,6 @@ import {
 } from 'date-fns';
 import russianLocale from 'date-fns/locale/ru';
 
-export const generateBoolean = () => {
-  return Math.random() > 0.5;
-}
-
 export const formatDate = (timestamp) => {
   const date = new Date(timestamp);
 
@@ -40,4 +36,20 @@ export const debounce = (func, time) => {
 
     timeout = setTimeout(func.bind(func, args), time);
   }
+}
+
+const generateBoolean = () => {
+  return Math.random() > 0.5;
+}
+
+export const asyncRequest = (random = true) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const success = random ? generateBoolean() : true;
+      if (!success) {
+        return reject();
+      }
+      resolve();
+    }, 1000);
+  })
 }

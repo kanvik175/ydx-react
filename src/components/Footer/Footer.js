@@ -1,41 +1,27 @@
 import React from 'react';
 import styles from './Footer.module.css';
+import { Link } from 'react-router-dom';
 
-const links = [
-  {
-    name: 'Support',
-    link: '#'
-  },
-  {
-    name: 'Learning',
-    link: '#'
-  },
-  {
-    name: 'Русская версия',
-    link: '#'
-  }
-]
-
-export default function Footer() {
+export default function Footer({ links, copyright }) {
   return (
-    <div className={styles.wrapper}>
+    <footer className={styles.wrapper}>
       <div className={styles.innerContainer}>
         <nav className={styles.nav}>
           <ul className={styles.list}>
             { links.map(({ name, link }, index) => (
               <li key={index} className={styles.listItem}>
-                <a className={styles.link} href={link}>
+                <Link className={styles.link} to={link}>
                   {name}
-                </a>
+                </Link>
               </li>
               ))
             }
           </ul>
         </nav>
         <p className={styles.copyright}>
-          &copy; 2020 Your Name
+          &copy; { copyright }
         </p>
       </div>
-    </div>
+    </footer>
   )
 }

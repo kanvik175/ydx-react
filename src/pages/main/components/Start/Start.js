@@ -1,6 +1,8 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useHistory } from 'react-router-dom';
 import styles from './Start.module.css';
+import Header from '../../../../components/Header/Header';
 import Logo from '../../../../components/Logo/Logo';
 import Button from '../../../../components/Button/Button';
 import ButtonWithIcon from '../../../../components/ButtonWithIcon/ButtonWithIcon';
@@ -17,10 +19,14 @@ export default function BuildHistory() {
 
   return (
     <div className={styles.wrapper}>
-      <header className={styles.header}>
+      <Helmet>
+        <title>Main</title>
+        <meta property="og:title" content="Main" />
+      </Helmet>
+      <Header>
         <Logo />
         <ButtonWithIcon clickHandler={clickHandler} text='Settings' icon={gearIcon}>Settings</ButtonWithIcon>
-      </header>
+      </Header>
       <main className={styles.content}>
         <div className={styles.info}>
           <img className={styles.settingsLogo} src={settingsLogo} alt='settings logo' />

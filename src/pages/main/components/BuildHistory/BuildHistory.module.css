@@ -13,13 +13,17 @@
 .title {
   font-weight: 500;
   font-size: 24px;
-  margin: 0 0 18px;
+  margin: 0;
 }
 
 .buttonContainer {
   display: grid;
   grid-template-columns: auto auto;
   grid-gap: 8px;
+}
+
+.content {
+  margin-top: 18px;
 }
 
 .cardList {

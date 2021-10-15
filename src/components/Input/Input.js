@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Input.module.css';
 
-export default function Input({
+const Input = React.forwardRef(({
   label,
   isRequired,
   placeholder,
@@ -14,7 +14,8 @@ export default function Input({
   padding,
   mask,
   isError = false,
-}) {
+  inputMode = 'text',
+}, ref) => {
   const inputId = `${name}-id`;
   const labelClassName = `${styles.label} ${
     isRequired && styles.label__required
@@ -49,13 +50,15 @@ export default function Input({
       )}
       <div style={inputContainerStyle} className={styles.inputContainer}>
         <input
-          type="text"
+          type='text'
+          inputMode={inputMode}
           style={inputStyle}
           id={inputId}
           placeholder={placeholder}
           className={inputClass}
           value={value}
           onChange={handleChange}
+          ref={ref}
         />
         {isClearButtonExists && (
           <button
@@ -68,4 +71,6 @@ export default function Input({
       </div>
     </div>
   );
-}
+});
+
+export default Input;

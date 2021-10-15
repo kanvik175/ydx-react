@@ -1,12 +1,12 @@
 import React, { useState, useContext } from 'react';
 import styles from './Form.module.css';
-import useInput from '../../../hooks/useInput';
+import useInput from '../../../../hooks/useInput';
 import { useHistory } from 'react-router-dom';
-import Input from '../../../components/Input/Input';
-import Spacer from '../../../components/Spacer/Spacer';
-import Button from '../../../components/Button/Button';
-import { generateBoolean } from '../../../utils/utils';
-import SettingsContext from '../../../context';
+import Input from '../../../../components/Input/Input';
+import Spacer from '../../../../components/Spacer/Spacer';
+import Button from '../../../../components/Button/Button';
+import { asyncRequest } from '../../../../utils/utils';
+import SettingsContext from '../../../../context';
 
 export default function Form() {
 
@@ -55,19 +55,16 @@ export default function Form() {
 
     setIsLoading(true);
 
-    setTimeout(() => {
-      const success = generateBoolean();
-      // const success = true;
-
-      if (success) {
+    asyncRequest()
+      .then(() => {
         setIsSettingsApplied(true);
         setIsLoading(false);
         history.push('/');
-      } else {
-        setIsError(true);
-        setIsLoading(false);
-      }
-    }, 1000);
+      })
+      .catch(() => {
+          setIsError(true);
+          setIsLoading(false);
+      })
   }
 
   const handleRepositoryChange = (value) => {
@@ -120,9 +117,11 @@ export default function Form() {
             <p className={styles.syncDescription}>Synchronize every</p>
             <Input 
               value={syncValue} 
+              name='sync'
               changeHandler={changeSyncValue} 
               textAlign='right' 
               width={52} 
+              inputMode='numeric'
               mask={/^\d+$/}
             />
             <p className={styles.syncUnits}>minutes</p>

@@ -1,6 +1,8 @@
 import React, { useState, useMemo } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useHistory } from 'react-router-dom';
 import styles from './BuildHistory.module.css';
+import Header from '../../../../components/Header/Header';
 import Button from '../../../../components/Button/Button';
 import ButtonWithIcon from '../../../../components/ButtonWithIcon/ButtonWithIcon';
 import Card from './components/Card/Card';
@@ -9,15 +11,17 @@ import gearIcon from '../../../../assets/gear.svg';
 import { initialCardList } from './mocks/mocks';
 import useMedia from '../../../../hooks/useMedia';
 import PopupNewBuild from './components/PopupNewBuild/PopupNewBuild';
+import { asyncRequest } from '../../../../utils/utils';
 
 const defaultCardsCount = 3;
 const increment = 3;
 
 export default function BuildHistory() {
 
-  const [cardList] = useState(initialCardList)
+  const [cardList, setCardList] = useState(initialCardList)
   const [visibleCardsCount, setVisibleCardsCount] = useState(defaultCardsCount);
   const [isOpenPopup, setIsOpenPopup] = useState(false);
+  const [isLoadingNewCards, setIsLoadingNewCards] = useState(false);
 
   const isMobile = useMedia('(max-width: 520px)');
 
@@ -31,7 +35,10 @@ export default function BuildHistory() {
     setIsOpenPopup(true);
   }
 
-  const handleShowMoreClick = () => {
+  const handleShowMoreClick = async () => {
+    setIsLoadingNewCards(true);
+    await asyncRequest(false);
+    setIsLoadingNewCards(false);
     setVisibleCardsCount((prevCount) => {
       const newCount = Math.min(cardList.length, prevCount + increment);
       return newCount;
@@ -42,6 +49,27 @@ export default function BuildHistory() {
     history.push('/settings');
   }
 
+  const lastCommitNumber = useMemo(() => 
+    Math.max(...cardList.map(({ commitNumber }) => commitNumber)), [cardList]);
+
+  const handlePopupSubmit = (hash) => {
+    const currentTime = Date.now();
+    setCardList((prevCardList) => [
+      {
+        status: 'success',
+        commitNumber: lastCommitNumber + 1,
+        commitMessage: 'default commit message',
+        commitHash: hash,
+        userName: 'rus',
+        branchName: 'master',
+        date: currentTime,
+        start: currentTime,
+        end: currentTime + 60 * 60 * 1000,
+      },
+      ...prevCardList
+    ])
+  }
+
   const isShowButton = visibleCardsCount !== cardList.length;
 
   const visibleCards = useMemo(() => {
@@ -50,7 +78,11 @@ export default function BuildHistory() {
 
   return (
     <div className={styles.wrapper}>
-      <header className={styles.header}>
+      <Helmet>
+        <title>Build History</title>
+        <meta property="og:title" content="Build History" />
+      </Helmet>
+      <Header>
         <h1 className={styles.title}>
           philip1967/my-awesome-repo
         </h1>
@@ -58,7 +90,7 @@ export default function BuildHistory() {
           <ButtonWithIcon text='Run build' icon={playIcon} clickHandler={openPopup} />
           <ButtonWithIcon icon={gearIcon} clickHandler={handleSettingClick} />
         </div>
-      </header>
+      </Header>
       <main className={styles.content}>
         <div className={styles.cardList}>
           {
@@ -72,9 +104,14 @@ export default function BuildHistory() {
           color='secondary'
           size={isMobile ? 'large' : 'small'}
           clickHandler={handleShowMoreClick} 
+          disabled={isLoadingNewCards}
         >Show more</Button> }
       </main>
-      <PopupNewBuild isOpen={isOpenPopup} closePopup={closePopup} />
+      <PopupNewBuild 
+        onSubmit={handlePopupSubmit} 
+        isOpen={isOpenPopup} 
+        closePopup={closePopup} 
+      />
     </div>
   );
 }
