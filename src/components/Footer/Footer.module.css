@@ -10,7 +10,7 @@
   display: grid;
   grid-template-columns: auto auto;
   align-items: center;
-  max-width: 840px;
+  max-width: 824px;
   flex-grow: 1;
 }
 
